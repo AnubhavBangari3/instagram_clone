@@ -1,0 +1,18 @@
+﻿{% extends 'instagram/base.html'  %}
+{%block body%}
+
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Register">
+    </div>
+    <br />
+    Already have an account?
+    <br /><a href="{% url 'login' %}">Log In here.</a>
+
+</form>
+
+{% endblock %}
+

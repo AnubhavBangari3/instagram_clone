@@ -1,0 +1,160 @@
+{% extends 'instagram/nav.html'  %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-mobile is-centered">
+            <div class="column is-half">
+                <!--FOr COmment-->
+                {% for notification in notifications %}
+
+                {% if notification.notification_type == 2 %}
+                <div class="notification">
+                    <a href="{% url 'delete-notifications' notification.id %}">
+                        <button class="delete">Delete</button>
+                    </a>
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                                {% if notification.sender.profile.picture %}
+                                <img src="{{notification.sender.profile.picture.url}}" alt="Placeholder image">
+                                {% else %}
+                                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                {% endif %}
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+
+                                <strong>
+                                    {{ notification.sender.profile.first_name }}
+                                    {{notification.sender.profile.last_name}}
+                                </strong>
+                                <small>@{{notification.sender.username}}</small>
+                                
+                                COmmented:
+                                <p>
+                                    {{notification.text_preview}} 
+                                    <br />
+                                    <small>{{notification.date|naturaltime  }}</small>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="media-right">
+                            <figure class="image is-64x64">
+                                <p>
+                                    <img src="{{notification.post.picture.url}}">
+                                </p>
+                            </figure>
+
+                        </div>
+                    </article>
+
+                </div>
+                {% endif %}
+                <br />
+                <!--For follow-->
+                {% if notification.notification_type == 3 %}
+                <div class="notification">
+                    <a href="{% url 'delete-notifications' notification.id %}">
+                        <button class="delete">Delete</button>
+                    </a>
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                                {% if notification.sender.profile.picture %}
+                                <img src="{{notification.sender.profile.picture.url}}" alt="Placeholder image">
+                                {% else %}
+                                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                {% endif %}
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+
+                                <strong>
+                                    {{ notification.sender.profile.first_name }}
+                                    {{notification.sender.profile.last_name}}
+                                </strong>
+                                <small>@{{notification.sender.username}}</small>
+                                <br />
+                                <p>
+                                    <i class="material-icons orange600">person_add</i>
+                                    Followed_you
+                                </p>
+                                <br />
+                                <small>{{notification.date|naturaltime  }}</small>
+                            </div>
+
+                        </div>
+                        <div class="media-right">
+                            <figure class="image is-64x64">
+                                <p>
+                                    <img src="{{notification.post.picture.url}}">
+                                </p>
+                            </figure>
+
+                        </div>
+                    </article>
+
+                </div>
+                {% endif %}
+                <!--For like-->
+                {% if notification.notification_type == 1 %}
+                <div class="notification">
+                    <a href="{% url 'delete-notifications' notification.id %}">
+                    <button class="delete">Delete</button></a>
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                                {% if notification.sender.profile.picture %}
+                                <img src="{{notification.sender.profile.picture.url}}" alt="Placeholder image">
+                                {% else %}
+                                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                {% endif %}
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+
+                                <strong>
+                                    {{ notification.sender.profile.first_name }}
+                                    {{notification.sender.profile.last_name}}
+                                </strong>
+                                <small>@{{notification.sender.username}}</small>
+                                <br />
+                                <p>
+                                    <i class="material-icons orange600">thumb_up</i>
+                                    Liked your post!
+                                </p>
+                                <small>{{notification.date|naturaltime  }}</small>
+
+                            </div>
+
+                        </div>
+                        <div class="media-right">
+                            <figure class="image is-64x64">
+                                <p>
+                                    <img src="{{notification.post.picture.url}}">
+                                </p>
+                            </figure>
+
+                        </div>
+                    </article>
+
+                </div>
+                {% endif %}
+                {% endfor %}
+                <br />
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+{% endblock %}

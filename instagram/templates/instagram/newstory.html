@@ -1,0 +1,31 @@
+{% extends 'instagram/nav.html'  %}
+{% block title %}New Post {% endblock %}
+
+{% block body %}
+
+<div class="card ">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card">
+
+            <div class="card-content" align="center">
+                <h1>NEW STORY</h1>
+                <div class="field">
+                    <label class="label is-medium">Choose your media</label>
+                    {{form.content}}
+                </div>
+                <div class="field">
+                    <label class="label is-medium">Caption</label>
+                    {{form.caption}}
+                </div>
+                
+                <button type="submit" class="button is-success">POST</button>
+
+
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

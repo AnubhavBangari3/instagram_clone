@@ -1,0 +1,14 @@
+{% extends 'instagram/nav.html'  %}
+
+
+{% block body %}
+<div class="card">
+    <form method="post" action="" enctype="multipart/form-data" role="form">
+        <h1>EDIT PROFILE</h1>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="btn btn-primary" type="submit" value="UpDate">
+    </form>
+</div>
+
+{% endblock %}
